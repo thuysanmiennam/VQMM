@@ -173,35 +173,21 @@
         }
 
         function startSpin() {
-    if (!wheelSpinning) {
-        const invoice = document.getElementById('invoice').value;
-        const store = document.getElementById('store').value;
+            if (!wheelSpinning) {
+                const invoice = document.getElementById('invoice').value;
+                const store = document.getElementById('store').value;
 
-        if (invoice && invoice.length === 8 && store) {
-            // Call your Google Apps Script here
-            fetch('https://script.google.com/macros/s/AKfycbzhISofkmcfHTaNR10bD5bNXvuMkQbbYP0HMKhKyVGtKIlfuzakOmqbxXqKXOO3nEgxNA/exec', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ invoice, store })
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Handle the response from Google Apps Script
-                console.log('Success:', data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-
-            stopAngle();
-            theWheel.startAnimation();
-            wheelSpinning = true;
-            audio.play();
-        } else {
-            alert("Vui lòng nhập hoá đơn mua hàng gồm 8 ký tự và chọn địa chỉ cửa hàng!");
+                if (invoice && invoice.length === 8 && store) {
+                    stopAngle();
+                    theWheel.startAnimation();
+                    wheelSpinning = true;
+                    // Play background audio
+                    audio.play();
+                } else {
+                    alert("Vui lòng nhập hoá đơn mua hàng gồm 8 ký tự và chọn địa chỉ cửa hàng!");
+                }
+            }
         }
-    }
-}
 
         function stopAngle() {
             let probability = Math.random();
