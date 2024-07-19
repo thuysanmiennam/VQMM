@@ -235,9 +235,18 @@
         }
 
         function alertPrize(indicatedSegment) {
-            alert("Bạn đã trúng: " + indicatedSegment.text);
-            wheelSpinning = false;
-        }
+  const invoice = document.getElementById('invoice').value;
+  const store = document.getElementById('store').value;
+
+  fetch('https://script.google.com/macros/s/AKfycbwzx4tw7B3QfVvWlnLl2AK4pl-mtmXSNdotidWDs2fOAGvE9dqcmziEGHJ2jHQRdbCI/exec' + '?invoice=' + invoice + '&store=' + store + '&indicatedSegment=' + encodeURIComponent(indicatedSegment.text))
+    .then(response => response.text())
+    .then(data => {
+      console.log(data);
+      alert("Bạn đã trúng: " + indicatedSegment.text);
+      wheelSpinning = false;
+    })
+    .catch(error => console.error('Error:', error));
+}
 
         document.getElementById('canvas').addEventListener('mousedown', function(e) {
             let wheelCanvas = document.getElementById('canvas');
